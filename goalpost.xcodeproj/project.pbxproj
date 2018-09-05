@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F90D7B69214009AF008735E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90D7B68214009AF008735E6 /* AppDelegate.swift */; };
-		F90D7B6B214009AF008735E6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90D7B6A214009AF008735E6 /* ViewController.swift */; };
+		F90D7B6B214009AF008735E6 /* GoalsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90D7B6A214009AF008735E6 /* GoalsVC.swift */; };
 		F90D7B6E214009AF008735E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F90D7B6C214009AF008735E6 /* Main.storyboard */; };
 		F90D7B71214009AF008735E6 /* goalpost.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F90D7B6F214009AF008735E6 /* goalpost.xcdatamodeld */; };
 		F90D7B73214009B1008735E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F90D7B72214009B1008735E6 /* Assets.xcassets */; };
@@ -18,7 +18,7 @@
 /* Begin PBXFileReference section */
 		F90D7B65214009AF008735E6 /* goalpost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = goalpost.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F90D7B68214009AF008735E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F90D7B6A214009AF008735E6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F90D7B6A214009AF008735E6 /* GoalsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsVC.swift; sourceTree = "<group>"; };
 		F90D7B6D214009AF008735E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F90D7B70214009AF008735E6 /* goalpost.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = goalpost.xcdatamodel; sourceTree = "<group>"; };
 		F90D7B72214009B1008735E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -56,8 +56,11 @@
 		F90D7B67214009AF008735E6 /* goalpost */ = {
 			isa = PBXGroup;
 			children = (
+				F90D7B80214009FD008735E6 /* Extensions */,
+				F90D7B7F214009F6008735E6 /* Enums */,
+				F90D7B7E214009E8008735E6 /* View */,
+				F90D7B7D214009DE008735E6 /* Controller */,
 				F90D7B68214009AF008735E6 /* AppDelegate.swift */,
-				F90D7B6A214009AF008735E6 /* ViewController.swift */,
 				F90D7B6C214009AF008735E6 /* Main.storyboard */,
 				F90D7B72214009B1008735E6 /* Assets.xcassets */,
 				F90D7B74214009B1008735E6 /* LaunchScreen.storyboard */,
@@ -65,6 +68,35 @@
 				F90D7B6F214009AF008735E6 /* goalpost.xcdatamodeld */,
 			);
 			path = goalpost;
+			sourceTree = "<group>";
+		};
+		F90D7B7D214009DE008735E6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F90D7B6A214009AF008735E6 /* GoalsVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F90D7B7E214009E8008735E6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F90D7B7F214009F6008735E6 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		F90D7B80214009FD008735E6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,7 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F90D7B71214009AF008735E6 /* goalpost.xcdatamodeld in Sources */,
-				F90D7B6B214009AF008735E6 /* ViewController.swift in Sources */,
+				F90D7B6B214009AF008735E6 /* GoalsVC.swift in Sources */,
 				F90D7B69214009AF008735E6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,6 +321,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2QD9NZV8MQ;
 				INFOPLIST_FILE = goalpost/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -307,6 +340,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2QD9NZV8MQ;
 				INFOPLIST_FILE = goalpost/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
