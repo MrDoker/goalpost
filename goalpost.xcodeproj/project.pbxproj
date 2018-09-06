@@ -13,6 +13,10 @@
 		F90D7B71214009AF008735E6 /* goalpost.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F90D7B6F214009AF008735E6 /* goalpost.xcdatamodeld */; };
 		F90D7B73214009B1008735E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F90D7B72214009B1008735E6 /* Assets.xcassets */; };
 		F90D7B76214009B1008735E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F90D7B74214009B1008735E6 /* LaunchScreen.storyboard */; };
+		F935B4B5214138AC001E6419 /* CreateGoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F935B4B4214138AC001E6419 /* CreateGoalVC.swift */; };
+		F935B4B721413A22001E6419 /* UIViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F935B4B621413A22001E6419 /* UIViewControllerExt.swift */; };
+		F98DC57A2140967900AFCC0B /* GoalTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98DC5792140967900AFCC0B /* GoalTableCell.swift */; };
+		F98DC57C2140A1BF00AFCC0B /* GoalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98DC57B2140A1BF00AFCC0B /* GoalType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		F90D7B72214009B1008735E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F90D7B75214009B1008735E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F90D7B77214009B1008735E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F935B4B4214138AC001E6419 /* CreateGoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGoalVC.swift; sourceTree = "<group>"; };
+		F935B4B621413A22001E6419 /* UIViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExt.swift; sourceTree = "<group>"; };
+		F98DC5792140967900AFCC0B /* GoalTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTableCell.swift; sourceTree = "<group>"; };
+		F98DC57B2140A1BF00AFCC0B /* GoalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				F90D7B6A214009AF008735E6 /* GoalsVC.swift */,
+				F935B4B4214138AC001E6419 /* CreateGoalVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -81,6 +90,7 @@
 		F90D7B7E214009E8008735E6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F98DC5792140967900AFCC0B /* GoalTableCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -88,6 +98,7 @@
 		F90D7B7F214009F6008735E6 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				F98DC57B2140A1BF00AFCC0B /* GoalType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -95,6 +106,7 @@
 		F90D7B80214009FD008735E6 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F935B4B621413A22001E6419 /* UIViewControllerExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -171,7 +183,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F90D7B71214009AF008735E6 /* goalpost.xcdatamodeld in Sources */,
+				F935B4B5214138AC001E6419 /* CreateGoalVC.swift in Sources */,
+				F98DC57C2140A1BF00AFCC0B /* GoalType.swift in Sources */,
+				F98DC57A2140967900AFCC0B /* GoalTableCell.swift in Sources */,
 				F90D7B6B214009AF008735E6 /* GoalsVC.swift in Sources */,
+				F935B4B721413A22001E6419 /* UIViewControllerExt.swift in Sources */,
 				F90D7B69214009AF008735E6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
