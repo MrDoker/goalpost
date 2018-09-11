@@ -14,6 +14,13 @@ let appDelegate = UIApplication.shared.delegate as? AppDelegate
 class GoalsVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var undoViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var undoView: UIView!
+    @IBOutlet weak var undoViewHeightConstraint: NSLayoutConstraint!
+    
+    var deletedGoal: Goal?
+    
+    let managedContext = appDelegate?.persistentContainer.viewContext
     
     var goals = [Goal]()
     
@@ -22,10 +29,17 @@ class GoalsVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.isHidden = false
+        
+        managedContext?.undoManager = UndoManager()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        fetchCoreDataObjects()
+        tableView.reloadData()
+    }
+    
+    func fetchCoreDataObjects() {
         fetch { (success) in
             if success {
                 if goals.count > 0 {
@@ -34,7 +48,20 @@ class GoalsVC: UIViewController {
                     tableView.isHidden = true
                 }
             }
-            tableView.reloadData()
+        }
+    }
+    
+    func showUndoGoalView() {
+        UIView.animate(withDuration: 0.5) {
+            self.undoViewHeightConstraint.constant = 45
+            self.undoView.layoutIfNeeded()
+        }
+        //hide view after 3 sec
+        Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { (timer) in
+            UIView.animate(withDuration: 0.5) {
+                self.undoViewHeightConstraint.constant = 0
+                self.undoView.layoutIfNeeded()
+            }
         }
     }
     
@@ -43,8 +70,19 @@ class GoalsVC: UIViewController {
         presentDetail(createGoalVC)
     }
     
-    @IBAction func unwindToGoalsVC(segue: UIStoryboardSegue) {
+    @IBAction func undoDeleteButtonPressed(_ sender: Any) {
+        undoDeletting()
+        UIView.animate(withDuration: 0.5) {
+            self.undoViewHeightConstraint.constant = 0
+            self.undoView.layoutIfNeeded()
+        }
+        fetch { (success) in
+            tableView.reloadData()
+        }
         
+    }
+    
+    @IBAction func unwindToGoalsVC(segue: UIStoryboardSegue) {
     }
     
 }
@@ -65,16 +103,84 @@ extension GoalsVC: UITableViewDelegate, UITableViewDataSource {
         }
         return UITableViewCell()
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (_, indexPath) in
+            self.removeGoal(atIndexPath: indexPath)
+            self.fetchCoreDataObjects()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            self.showUndoGoalView()
+        }
+        deleteAction.backgroundColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
+        
+        let addAction = UITableViewRowAction(style: .normal, title: "ADD 1") { (_, indexPath) in
+            self.setProgressForGoal(atIndexPath: indexPath)
+            self.tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+        addAction.backgroundColor = #colorLiteral(red: 0.9058823529, green: 0.6156862745, blue: 0.1333333333, alpha: 1)
+        
+        return [deleteAction, addAction]
+    }
+    
 }
 
+
+//Core Data extension
 extension GoalsVC {
     func fetch(_ completion: (_ success: Bool) -> ()) {
-        guard let managedContext = appDelegate?.persistentContainer.viewContext else { return }
-        do {
-            goals = try managedContext.fetch(Goal.fetchRequest())
-            completion(true)
-        } catch {
-            debugPrint("!!!!!!!!!!!!! Could not fetch: \(error.localizedDescription) !!!!!!!!!!!!")
+        if let context = managedContext {
+            do {
+                goals = try context.fetch(Goal.fetchRequest())
+                completion(true)
+            } catch {
+                debugPrint("!!!!!!!!!!!!! Could not fetch: \(error.localizedDescription) !!!!!!!!!!!!")
+            }
         }
     }
+    
+    func removeGoal(atIndexPath indexPath: IndexPath) {
+        managedContext?.delete(goals[indexPath.row])
+        
+        do {
+            try managedContext?.save()
+        } catch {
+            debugPrint("!!!!!!!!!!!!! Could not save: \(error.localizedDescription) !!!!!!!!!!!!")
+        }
+    }
+    
+    func undoDeletting() {
+        managedContext?.undoManager?.undo()
+       do {
+            try managedContext?.save()
+        } catch {
+            debugPrint("!!!!!!!!!!!!! Could not save: \(error.localizedDescription) !!!!!!!!!!!!")
+        }
+    }
+    
+    func setProgressForGoal(atIndexPath indexPath: IndexPath) {
+        let choosenGoal = goals[indexPath.row]
+        
+        if choosenGoal.goalProgress < choosenGoal.goalCompletionValue {
+            choosenGoal.goalProgress = choosenGoal.goalProgress + 1
+        } else {
+            return
+        }
+        
+        do {
+            try managedContext?.save()
+        } catch {
+            debugPrint("!!!!!!!!!!!!! Could not save progress: \(error.localizedDescription) !!!!!!!!!!!!")
+        }
+    }
+    
 }
+
