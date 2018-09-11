@@ -19,9 +19,9 @@ class FinishGoalVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //createGoalButton.bindToKeyboard()
         createGoalButton.removeFromSuperview()
         pointsTextField.inputAccessoryView = createGoalButton
+        pointsTextField.becomeFirstResponder()
     }
     
     func initData(description: String, type: GoalType) {

@@ -18,6 +18,9 @@ class CreateGoalVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        goalTextView.delegate = self
+        
         nextButton.bindToKeyboard()
         shortTermButton.setSelectedColor()
         longTermButton.setDeselectedColor()
@@ -54,4 +57,17 @@ class CreateGoalVC: UIViewController {
         dismissDetail()
     }
     
+}
+
+extension CreateGoalVC: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == "What is your goal?" {
+            textView.text = ""
+        }
+    }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text == "" {
+            textView.text = "What is your goal?"
+        }
+    }
 }
