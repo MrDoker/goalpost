@@ -78,13 +78,12 @@ class GoalsVC: UIViewController {
         }
         fetch { (success) in
             tableView.reloadData()
+            tableView.isHidden = false
         }
         
     }
     
-    @IBAction func unwindToGoalsVC(segue: UIStoryboardSegue) {
-    }
-    
+    @IBAction func unwindToGoalsVC(segue: UIStoryboardSegue) {}
 }
 
 extension GoalsVC: UITableViewDelegate, UITableViewDataSource {
